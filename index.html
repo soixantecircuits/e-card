@@ -22,7 +22,12 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
 
   <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="css/inuit.css">
+  <!-- Plugins -->
+  <link rel="stylesheet" href="css/igloos.css">
   
+<link rel="stylesheet" href="css/application.css">  
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
   <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
@@ -32,27 +37,54 @@
 </head>
 
 <body>
-  <header>
-
-  </header>
-  <div role="main">
-
+  <div id="video">
+      <h1>Your flash player is not up to date, please download the last version :</h1>
+      <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
   </div>
+  <div id="nuage"></div>
+  <div id="main" role="main">
+    <div id="message_input_box">
+      <form id="new_message" action="#" method="post">
+        <fieldset class="grid-12">
+          <label for="name">Receiver email address:</label>
+          <input type="text" id="name" required placeholder="Enter your full name">
+      
+          <label for="email">Your name:</label>
+          <input type="email" id="email" required placeholder="Enter your email address">
+      
+          <label for="message">Your message:</label>
+          <textarea id="message" placeholder="What's on your mind?"></textarea>
+          <p class="text-center">
+            <input id="send_message" type="submit" value="Send message">
+          </p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
   <footer>
 
   </footer>
-
+  
 
   <!-- JavaScript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.0.min.js"><\/script>')</script>
 
 
   <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/libs/cufon-yui.js"></script>
+  <script defer src="js/libs/swfobject.js"></script>
+  <script defer src="js/mylibs/calibri.font.js"></script>
+  <script defer src="js/mylibs/jquery.center.debug.js"></script>
   <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
+  <script defer src="js/libs/poll.min.js"></script>
+  <script defer src="js/libs/h5f.min.js"></script>
+  <script defer src="js/plugins/jquery.runloop.1.0.3.js"></script>
+  <script defer src="js/plugins/jquery.tinypubsub.min.js"></script>
+  <script defer src="js/application.js"></script>
   <!-- end scripts -->
 
 

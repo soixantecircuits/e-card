@@ -1,0 +1,54 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+
+<bg>	
+	
+	
+	
+	<navi>
+		<color>0xCCCCCC</color>		<!-- NORMAL COLOR OF THE NAVIGATION BULLETS -->
+		<color>0x9999FF</color>		<!-- ROLLOVER COLOR OF THE NAVIGATION BULLETS -->
+		
+		<x>-5</x>					<!-- THE NAVIGATION POSITIONING ON X AXIS FORM THE RIGHT SIDE OF THE SCREEN -->
+		<y>15</y>					<!-- THE NAVIGATION POSITIONING ON Y AXIS -->
+		<spacer>5</spacer>			<!-- SPACE BETWEEN THE NAVIGATION BULLETS -->
+	
+	</navi>
+
+	
+	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- THE ARRANGEMENT PART OF THE XML FILE. HERE YOU CHOOSE WHAT KIND OF CONTENT TO DISPLAY AND IN WHAT ORDER. -->
+	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	<section>
+		<autoplay>on</autoplay>	<!-- ON/OFF -->	
+		<id>0</id>					<!-- THE 1ST CONTENT WILL DISPLAY -->
+	</section>
+	
+	
+
+	
+	<!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- THE CONTENT PART OF THE XML FILE. HERE YOU CHOOSE WHAT TYPE OF CONTENT WILL BE LOADED. -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////// -->	
+		
+		
+	<item>
+		<type>video</type>							<!-- TYPE OF THE CONTENT FILE -->
+		<path>rushed_non_monte.f4v</path>				<!-- THE PATH TO THE BACKGROUND FILE. IT CAN BE IMAGE,SWF OR VIDEO. -->
+		<resize>scale</resize>						<!-- THE SCALE VALUE WILL MAINTAIN ASPECT RATIO AND MAKE IT FULLSCREEN. CHOOSE VALUES LIKE SCALE/FIT/STRETCH/NONE -->
+		<verticalalign>center</verticalalign>		<!-- TOP/CENTER/BOTTOM -->
+		<horizontalalign>center</horizontalalign>	<!-- LEFT/CENTER/RIGHT -->
+		<buffertime>1</buffertime>
+		<alpha>1</alpha>							<!-- 0 = INVISIBLE / 1 = FULL OPACITY -->
+		<smoothing>1</smoothing>					<!-- 0 = OFF / 1 = ON -->
+		<volume>0.8</volume>						<!-- VOLUME, IF VIDEO WITH AUDIO. 0 = MUTE / 1 = 100%-->
+		<loops>0</loops>							<!-- HOW MANY TIMES THIS VIDEO WILL PLAY  (0 = infinite times)-->
+		<effectpattern></effectpattern>		<!-- SELECT THE PATH TO A PNG PATTERN -->
+		<effectalpha>0</effectalpha>				<!-- ALPHA OF THE PATTERN. 0 = INVISIBLE / 1 = FULL OPACITY -->
+	</item>		
+	
+	<!-- /// -->
+	<!-- END -->
+	<!-- /// -->
+	
+</bg>
