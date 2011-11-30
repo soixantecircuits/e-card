@@ -3,12 +3,13 @@ html, body, div {
 	overflow: hidden;
 }
 body {
-	background: #fff;
+	background: #eee;
 	margin: 0;
 }
 #video {
 	height: 100%;
 	z-index:0;
+	text-align:center;
 }
 
 fieldset{
@@ -17,17 +18,27 @@ fieldset{
 
 #message_input_box{
 	display:none;
-	max-width: 850px;
-	margin:0 auto;
+	max-width: 800px;
+	margin:10% auto;
+	position: relative;
+	overflow: visible;
+}
+
+label{
+	margin-top: 20px;
 }
 
 input{
-	width:100%;
+	width:97%;
+}
+
+input:invalid, textarea:invalid {
+	background-color: #fff;
 }
 
 textarea{
 	resize:none;
-	width:100%;
+	width:97%;
 	height:80px;
 }
 
@@ -36,18 +47,62 @@ input#send_message{
 }
 
 #nuage{
+	display:none;
 	position:absolute;
-	top:10px;
-	left:200px;
+	top:20px;
+	right: -276px;
+	background:url(../img/nuage_00.png) transparent no-repeat;
 	z-index:200;
-	width:400px;
+	width:600px;
 	height:200px;
-	background:red;
+}
+
+#nuage0{
+	display:none;
+	position:absolute;
+	top:130px;
+	right: -276px;
+	background:url(../img/nuage_01.png) transparent no-repeat;
+	z-index:200;
+	width:600px;
+	height:200px;
+}
+
+#nuage1{
+	display:none;
+	position:absolute;
+	top:300px;
+	left: 50px;
+	background:url(../img/nuage_02.png) transparent no-repeat;
+	z-index:200;
+	width:600px;
+	height:200px;
+}
+
+#nuage2{
+	display:none;
+	position:absolute;
+	top:20px;
+	right: -276px;
+	background:url(../img/nuage_03.png) transparent no-repeat;
+	z-index:200;
+	width:600px;
+	height:200px;
+}
+
+#logo{
+	background:url(../img/CAT.png) transparent no-repeat;
+	width:120px;
+	height:120px;
 	display:block;
+	top:-10px;
+	right:-52px;
+	position:absolute;
 }
 
 #main{
 	position: absolute;
 	top: 0px;
 	width: 96%;
+	z-index:999;
 }
