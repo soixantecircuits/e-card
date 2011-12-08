@@ -1,3 +1,20 @@
+<?php
+function sanitize($var,$toInt=false){
+  $var = stripslashes(strip_tags(trim($var)));
+  return ($toInt) ? (int)$var : $var;
+}
+
+if (!empty ($_GET))
+{
+  if (isset($_GET['lang']) != '') { $_GET['lang'] = sanitize($_GET['lang']); }
+}else if (!empty ($_POST)){
+  echo '<!--POST-->';
+}else{
+  echo '<!--no no-->';
+}
+
+?>
+
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -26,7 +43,7 @@
   <link rel="stylesheet" href="css/inuit.css">
   <!-- Plugins -->
   <link rel="stylesheet" href="css/igloos.css">
-  
+  <link rel="stylesheet" href="css/jquery.iGrowl.min.css">
 <link rel="stylesheet" href="css/application.css">  
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
@@ -38,7 +55,7 @@
 
 <body>
   <div id="video">
-      <h1>You need flash to play this content :</h1>
+      <h2>Sorry, you need flash to play this e-card, go download it there :</h2>
       <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
   </div>
   <div id="nuage"></div>
@@ -46,23 +63,33 @@
   <div id="main" role="main">
     <div id="message_input_box">
       <div id="logo"></div>
-      <form id="new_message" action="#" method="post">
-        <fieldset class="grid-12">
-          <label for="name">Receiver email address:</label>
-          <input type="text" id="name" required placeholder="Enter your full name">
+      <form id="new_message">
+        <fieldset class="grid-12" id="array">
+          <label for="name">Your name:</label>
+          <input name="name" type="text" id="name" required placeholder="Enter your full name">
       
-          <label for="email">Your name:</label>
-          <input type="email" id="email" required placeholder="Enter your email address">
+          <label for="email">Receiver email address:</label>
+          <input name="email" type="email" id="email" required placeholder="Enter your email address">
       
           <label for="message">Your message:</label>
-          <textarea id="message" placeholder="What's on your mind?"></textarea>
+          <textarea name="message" id="message" placeholder="What's on your mind?"></textarea>
           <p class="text-center">
             <input id="send_message" type="submit" value="Send message">
           </p>
+          <input name="lang" type="text" id="lang" style="display:none" value ="<?php echo $_GET['lang'];?>">
         </fieldset>
       </form>
     </div>
+    <div id="scorediv">
+      <p id="remerciement">
+      Blabla
+      </p>
+    </div>
   </div>
+
+  <div id="back"></div>
+  <div id="feedback">
+  Loading...</div>
 
   <footer>
 
@@ -75,6 +102,11 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.0.min.js"><\/script>')</script>
 
+  <script>
+    var avoidFlash = true;
+    <?php if($_GET['lang']==""){$_GET['lang']="en";}?>
+    var lang = "<?php echo $_GET['lang']; ?>";
+  </script>
 
   <!-- scripts concatenated and minified via build script -->
   <script defer src="js/libs/cufon-yui.js"></script>

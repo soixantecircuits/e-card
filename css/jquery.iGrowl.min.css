@@ -1,0 +1,36 @@
+#iphone_growl {
+width:160px;
+color:#fff;
+font-weight:700;
+text-align:center;
+  background-color:rgba(0,0,0,0.5);
+  font-family:Helvetica;
+  border-radius:10px;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  text-shadow:1px 1px 1px rgba(0,0,0,1);
+background-position:center center;
+background-repeat:no-repeat;
+position:fixed;
+top:50%;
+left:50%;
+padding-top:130px;
+margin-top:-80px;
+margin-left:-80px;
+overflow:hidden;
+padding-bottom:10px;
+z-index:9999;
+display: block;
+}
+
+#iphone_growl.iphone_spinner {
+background-image:url(spinner.gif);
+}
+
+#iphone_growl.iphone_complete {
+background-image:url(tick.png);
+}
+
+#iphone_growl.iphone_error {
+background-image:url(cross.png);
+}

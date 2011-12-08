@@ -40,9 +40,9 @@
 		<horizontalalign>center</horizontalalign>	<!-- LEFT/CENTER/RIGHT -->
 		<buffertime>1</buffertime>
 		<alpha>1</alpha>							<!-- 0 = INVISIBLE / 1 = FULL OPACITY -->
-		<smoothing>1</smoothing>					<!-- 0 = OFF / 1 = ON -->
-		<volume>0.8</volume>						<!-- VOLUME, IF VIDEO WITH AUDIO. 0 = MUTE / 1 = 100%-->
-		<loops>0</loops>							<!-- HOW MANY TIMES THIS VIDEO WILL PLAY  (0 = infinite times)-->
+		<smoothing>0</smoothing>					<!-- 0 = OFF / 1 = ON -->
+		<volume>0.7</volume>						<!-- VOLUME, IF VIDEO WITH AUDIO. 0 = MUTE / 1 = 100%-->
+		<loops>1</loops>							<!-- HOW MANY TIMES THIS VIDEO WILL PLAY  (0 = infinite times)-->
 		<effectpattern></effectpattern>		<!-- SELECT THE PATH TO A PNG PATTERN -->
 		<effectalpha>0</effectalpha>				<!-- ALPHA OF THE PATTERN. 0 = INVISIBLE / 1 = FULL OPACITY -->
 	</item>		

@@ -1,17 +1,12 @@
 <?php
-require_once '../lib/swift_required.php';
-require ('../config.php');
-$table = 'beta_register';
-mysql_select_db($db_name);
-
-$connection = $db_connect;
+require_once 'lib/swift_required.php';
 // écriture de données
 if (!empty($_POST))
 {
 	if (isset($_POST['name']) != '') { $_POST['name'] = sanitize($_POST['name']); }
-	if (isset($_POST['fname']) != '') { $_POST['fname'] = sanitize($_POST['fname']); }
+	if (isset($_POST['message']) != '') { $_POST['message'] = sanitize($_POST['message']); }
+	if (isset($_POST['lang']) != '') { $_POST['lang'] = sanitize($_POST['lang']); }
 	if (isset($_POST['email']) != '') { $_POST['email'] = sanitize($_POST['email']); }
-	if (isset($_POST['image']) != '') { $_POST['image'] = sanitize($_POST['image']); }
 	/* ERREURS
 		0: 	Veuillez indiquer votre nom
 		1:	L'adresse email que vous avez indiquée n'est pas valide
@@ -43,74 +38,134 @@ if (!empty($_POST))
 		exit;
 	}
 	
-	$query = "INSERT INTO ".$table. "(name, ".
-									 "fname, ".	
-									 "email,".
-									 "ip) VALUES ('".
-									 mysql_real_escape_string($_POST['name'])."','".
-									 mysql_real_escape_string($_POST['fname'])."','".
-									 mysql_real_escape_string($_POST['email'])."','".
-									 mysql_real_escape_string(getRealIpAddr())."')";
 	try {
-		$result = mysql_query($query);
-		$id = mysql_insert_id($connection);
-	// echo 'ins id ' . $id;
-	// CHECK
-	//ici on renvoie le score dans msg, ce qui permet à l'application de récupérer le score. C'est un simple tableau avec le nom et le score. 
-	//le tri de score s'effectue par pays.
-		$message = Swift_Message::newInstance();
-		$message->setSubject('Dior - Your own Lady Dior');
-		// If placing the embed() code inline becomes cumbersome
-// it's easy to do this in two steps
-		if($_POST['image'] != "xx")
-		{		
-				$imageNum = 'sac_lady_dior_'.$_POST['image'].'.jpg';
-				$src = imagecreatefromjpeg($imageNum);
-				$dest = imagecreatetruecolor(318, 564);
+		$translation['en'] = "send you an greeting animated card from Groupe CAT!<br/><br/>Discover it quickly by clicking here:";
 
-// Copy
-				imagecopy($dest, $src, 0, 0, 200, 300, 318, 564);
+		$translation['fr'] = "vous a envoyé une carte de voeux du Groupe CAT !<br/><br/>Découvrez-là en cliquant ici :";
 
-				// Output and free from memory
-				
-				imagejpeg($dest,'ladydior.jpg');
+		$translation['es'] = "le ha mandado una tarjeta de Navidad animada del Groupe CAT !<br/><br/>Descúbrala rápidamente pinchando aquí :";
 
-				imagedestroy($dest);
-				imagedestroy($src);
-				$cid = $message->embed(Swift_Image::fromPath('ladydior.jpg'));
-		}
-		else
-			$cid = "empty";
-			
-		$logoid = $message->embed(Swift_Image::fromPath("logo.jpg"));	
-			
+		$translation['de'] = "hat Ihnen eine animierte Glückwunschkarte geschickt von Groupe CAT!<br/><br/>Entdecken Sie diese schnell indem Sie hier klicken:";
+
+		$translation['pl'] = "przesyła animowaną kartkę świąteczną od Groupe CAT!<br/><br/>Otwórz kartkę klikając tutaj:";
+		
+		$title['en'] = "Cat Group E-Card";
+
+		$title['fr'] = "Cat Group E-Card";
+
+		$title['es'] = "Cat Group E-Card";
+
+		$title['de'] = "Cat Group E-Card";
+
+		$title['pl'] = "Cat Group E-Card";
+		
+		
+
+			if($_POST['lang']!='en'||$_POST['lang']!='fr'||$_POST['lang']!='es'||$_POST['lang']!='de'||$_POST['lang']!='pl'){
+				$_POST['lang']='en';
+			}
+
+			$message = Swift_Message::newInstance();
+		$message->setSubject($title[$_POST['lang']]);
+
+		$logoid = $message->embed(Swift_Image::fromPath("logo.png"));	
+		$nuage = $message->embed(Swift_Image::fromPath("nuage_logo.png"));	
+		$nuage2_mail = $message->embed(Swift_Image::fromPath("nuage2_mail.png"));	
+		$video_go = $message->embed(Swift_Image::fromPath("video_go.png"));	
+
 		$message->setBody(
 			'<html>' .
 			' <head></head>' .
 			' <body style="height:100%;text-align:center;color:#BBB;display:block;background-color:#FFF;">' .
-			'  <img style="position:relative;margin:0 auto;display:block;" src="' . $logoid . '" width="400px" height="160px" alt="Dior"/>'.
-			'  <br/><br/><img style="position:relative;margin:0 auto;display:block;" src="' . $cid . '" alt="ladydior" />' .
-			'  <p style="font-size:13px">' .
-			'  <br/><br/>Vous venez de créer votre propre Lady Dior, <br/>avec cette photo vous entrez désormais dans la légende de ce sac Icône.	'.
-			'  <br/><br/>You have just designed your very own Lady Dior bag, with this picture, <br/>you are now becoming a part of the legend of this Iconic bag.'.
-			'  <br/><br/>您刚设计完成了专属于您的Lady Dior<br/>这幅图片的诞生意味着您已经成为这款标志性女包传奇的一部分。' .
+			'  <img style="position:relative;margin:0 auto;display:block;" src="' . $logoid . '" width="120px" height="120px" alt="Cat group"/>'.
+			'  <h1 style="font-size:14px">'.
+			'  '.$_POST['name'].',</h1>'.
+			'  <p>' .
+			$translation[$_POST['lang']].
 			'  </p>' .
 			' </body>' .
 			'</html>',
 	   	   'text/html' //Mark the content-type as HTML
 		);
-		$message->addPart('Vous venez de créer votre propre Lady Dior, avec cette photo vous entrez désormais dans la légende de ce sac Icône.'.
-			' You have just designed your very own Lady Dior bag, with this picture, you are now becoming a part of the legend of this Iconic bag.'.
-			' 您刚设计完成了专属于您的Lady Dior<br/>这幅图片的诞生意味着您已经成为这款标志性女包传奇的一部分。'
+
+
+		$message->setBody('<html dir="ltr" lang="fr-FR"><head>
+											<meta charset="UTF-8">
+											</head>
+	<body style="margin:0px;padding:0px;color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: #7da7d9; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7da7d9", endColorstr="#feffff"); background: -webkit-gradient(linear, left top, left bottom, from(#7da7d9), to(#feffff)); background: -moz-linear-gradient(top,  #7da7d9,  #feffff);vertical-align:baseline;font-family:Helvetica, "Trebuchet MS", Verdana, Arial, sans-serif;">
+	
+		<div style="color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: transparent;vertical-align:baseline;font-family:Helvetica, "Trebuchet MS", Verdana, Arial, sans-serif;">
+			<div style="margin:0px auto;border-left:0px solid ;border-right:0px solid;padding:0 5px;width:600px;background:none repeat scroll 0 0;">
+				
+				<div style="margin:0px 0 0;border:none;padding:0;">
+					<div style="margin:0;border:none;padding:0;">
+						<div style="margin:0;border:none;padding:0;width:100%;">
+							<table cellspacing="0" cellpadding="0" style="margin:0;border:none;padding:0;">
+								<tbody><tr>
+									<td style="margin:0;border:none;padding:0;">
+										<h1 style="margin:32px 0 17px;border:none;padding:0;width:100px;font-size:30px;font-family:Helvetica, "Trebuchet MS", Verdana, Arial, sans-serif;line-height:36px;">
+											<span style="margin:0;border:none;padding:0;">
+													<img alt=" " src="' . $nuage . '">
+											</span>
+										</h1>
+									</td>
+								</tr>
+							</tbody></table>
+						</div>
+					</div>
+				</div>
+				<!-- end header -->
+
+				<div style="margin:0 auto;border:none;padding:10px 0 0;width:100%;overflow:hidden;">
+					<div style="margin:0;border:none;padding:0;width:100%;">
+						<div style="border:none;padding:0;color:#444;font-size:13px;line-height:24px;">
+								<span style="color: white;font-size:18px;margin-left:80px;">'.$_POST['name'].',</span>
+							<div style="color: white;margin-left:80px;font-size:17px;">
+								'.$translation[$_POST['lang']].'
+							</div>
+							<span style="margin:0;border:none;padding:0;margin-left: 360px;margin-top: -41px;position: absolute;">
+													<img alt=" " src="' . $video_go . '">
+							</span>
+						</div>
+					</div>
+			  </div>
+		</div>
+		<div style="margin:0px 0 0;border:none;padding:0;">
+					<div style="margin:0;border:none;padding:0;">
+						<div style="margin:0;border:none;padding:0;width:100%;">
+							
+							<table style="border: 0px solid;width: 100%;text-align: right;">
+								<tr style="border: 0px solid;width: 100%;text-align: right;background-color: transparent;color: black;margin:0px;padding:0px">
+									<th style="border: 0px solid;width: 100%;text-align: right;background-color: transparent;color: black;margin:0px;padding:0px"><span style="margin:0;border:none;padding:0;">
+													<img alt=" " src="' . $nuage2_mail . '>
+											</span></th>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+</div>
+</body></html>',
+	   	   'text/html' //Mark the content-type as HTML
+		);
+
+
+
+		$message->addPart('Cat group vous souhaite une excellente année 2012 et vous invite à lire sa carte de voeux en ligne.'.
+			' Cat Group wish you a happy new year 2012 and invites you to view the greeting card online.'.
+			' Grupo del gato que usted desea un feliz año nuevo 2012 y te invita a ver la línea de la tarjeta de felicitación.'.
+			' Cat Group wünschen Ihnen ein frohes neues Jahr 2012 und lädt Sie ein, die Grußkarte online ansehen.'.
+			' Grupa Cat życzę szczęśliwego nowego roku 2012 i zaprasza do wyświetlenia powitania on-line karty.'
 			, 'text/plain');
 
 		
-		$message->setReturnPath('newsletter@dior.com');
-		$message->setFrom(array('newsletter@dior.com' => 'Dior - Lady Dior'));
+		$message->setReturnPath('infos@catgroup.com');
+		$message->setFrom(array('infos@catgroup.com' => 'Cat Group'));
 		$message->addTo($_POST['email']);
-		$message->setPriority(3);
+		$message->setPriority(1);
 		
-		date_default_timezone_set("Asia/Shanghai");
+		date_default_timezone_set("France/Paris");
 		
 		$transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
 
@@ -122,7 +177,7 @@ if (!empty($_POST))
 
 	
 		echo '{"success":true, "msg":'.json_encode($result).'}';
-	}
+}
 	catch (Exception $e){
 		echo '{"success":false, "msg":'.json_encode('10').'}';
 		exit;
@@ -131,40 +186,8 @@ if (!empty($_POST))
 // lecture des scores
 else if (!empty ($_GET))
 {
-	if (isset($_GET['key']) && sanitize($_GET['key'])=='7afb92816faaea844ac1a90f5db86a8f')
-	{
-		$sql= "TRUNCATE TABLE ".$table ;
-		try {
-			$res4 = mysql_query ($sql) or DIE(mysql_error());
-		}
-		catch (Exception $e){
-			echo '{"success":false, "msg":'.json_encode('600').'}';
-		}
-	}
-	else
-	{
-		$limit = sanitize($_GET['limit'],true);
-		if ($limit < 1 )
-		{
-			echo '{"success":false, "msg":'.json_encode('200').'}';
-			exit;
-		}
-		$sql = "SELECT name,email,ip FROM ".$table;
-		$sql .= " ORDER BY name ASC LIMIT 0," . $limit;
-		// echo $sql;
-		try {
-			$res3 = mysql_query ($sql);
-			$result = array('registered' => array());
-			while ($row = mysql_fetch_assoc($res3))
-			{	
-				$result['registerd'][] = $row;
-			}
-			echo '{"success":true, "msg":'.json_encode($result).'}';
-		}
-		catch (Exception $e){
-			echo '{"success":false, "msg":'.json_encode('20').'}';
-		}
-	}
+	echo '{"success":false, "msg":'.json_encode('Wrong STATE').'}';
+	exit;
 }
 else{
 	echo '{"success":false, "msg":'.json_encode('500').'}';
