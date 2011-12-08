@@ -65,13 +65,13 @@ if (!empty ($_GET))
       <div id="logo"></div>
       <form id="new_message">
         <fieldset class="grid-12" id="array">
-          <label for="name">Your name:</label>
+          <label id="name_lb" for="name">Your name:</label>
           <input name="name" type="text" id="name" required placeholder="Enter your full name">
       
-          <label for="email">Receiver email address:</label>
+          <label id="email_lb" for="email">Receiver email address:</label>
           <input name="email" type="email" id="email" required placeholder="Enter your email address">
       
-          <label for="message">Your message:</label>
+          <label id="message_lb" for="message">Your message:</label>
           <textarea name="message" id="message" placeholder="What's on your mind?"></textarea>
           <p class="text-center">
             <input id="send_message" type="submit" value="Send message">

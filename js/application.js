@@ -1,11 +1,16 @@
 /* Author:Soixante circuits
 2011
 */
+
+/*Some param*/
 var cat = {
     sens: 1,
     isSubmitable: true
 };
 
+
+/*Translation object*/
+/*The current language is passed by the php and the _GET variable*/
 var translation_list = {
     en: {
         error: "Oops",
@@ -15,6 +20,13 @@ var translation_list = {
         email: "Please, check your email",
         send: "Send",
         thankyou: "Thank you !"
+        your_name: "Your name:",
+        your_name_fld: "Enter your full name ",
+        receiver: "Receiver email address:",
+        receiver_fld: "Enter his email address",
+        your_message: "Your message",
+        your_message_fld: "What's on your mind?",
+        send: "Send message"
     },
     fr: {
         error: "Oops",
@@ -23,7 +35,14 @@ var translation_list = {
         name: "Votre nom n'est pas rempli",
         email: "Veuillez vérifier votre email",
         send: "Envoyé",
-        thankyou: "Merci !"
+        thankyou: "Merci !",
+        your_name: "Votre nom :",
+        your_name_fld: "Votre nom complet ",
+        receiver: "L'adresse du destinataire :",
+        receiver_fld: "Inscrivez l'adresse email du destinataire",
+        your_message: "Votre message",
+        your_message_fld: "Qu'avez-vous en tête ?",
+        send: "Envoyer le message",
     },
     de: {
         error: "Oops",
@@ -32,7 +51,14 @@ var translation_list = {
         name: "Ihr Name ist nicht gefüllt",
         email: "Bitte überprüfen Sie Ihre E-Mail",
         send: "Gesandte",
-        thankyou: "Danke !"
+        thankyou: "Danke !",
+        your_name: "Ihr Name",
+        your_name_fld: "Ihr Name",
+        receiver: "Die Adresse des Empfängers ein:",
+        receiver_fld: "Geben Sie die E-Mail-Adresse",
+        your_message: "Ihre Nachricht",
+        your_message_fld: "Was willst du im Sinn?",
+        send: "Nachricht senden"
     },
     pl: {
         error: "Oops",
@@ -41,7 +67,14 @@ var translation_list = {
         name: "Twoje nazwisko nie jest wypełniona",
         email: "Proszę sprawdzić pocztę",
         send: "poseł",
-        thankyou: "Dziękujemy!"
+        thankyou: "Dziękujemy!",
+        your_name: "Twoje imię",
+        your_name_fld: "Twoje imię",
+        receiver: "odbiorcy",
+        receiver_fld: "Wpisz adres e-mail",
+        your_message: "Twoja wiadomość",
+        your_message_fld: "Co masz na myśli?",
+        send: "Wyślij wiadomość"
     },
     es: {
         error: "Oops",
@@ -50,23 +83,28 @@ var translation_list = {
         name: "Su nombre no se llena",
         email: "Por favor, consultar su correo electrónico",
         send: "enviado",
-        thankyou: "¡Gracias!"
+        thankyou: "¡Gracias!",
+        your_name: "Tu nombre",
+        your_name_fld: "Tu nombre",
+        receiver: "La dirección del destinatario:",
+        receiver_fld: "Escriba la dirección de correo electrónico del destinatario",
+        your_message: "Tu mensaje",
+        your_message_fld: "¿Qué tienes en mente?",
+        send: "Enviar mensaje"
     }
 };
 
+/*we load the scrip with lang variable setup from the send.php file or index.php file*/
 var translation = translation_list[lang];
 
 
+/*check if the email is correct*/
 function isValidEmailAddress(emailAddress) {
     var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     return pattern.test(emailAddress);
 }
 
-function changePicture(number) {
-    $("#formule h1").after('<img id="pict" src="http://dior.local/register/sac_lady_dior_' + number + '.jpg?=foo" width="200" height="300"/>');
-    $("#image").attr('Value', number).attr('title', number);
-}
-
+/*cross browser parsing _ might not be really usefull, but used in the data parsing*/
 function parseJSON(json) {
     try {
         if (/^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test(json)) {
@@ -77,6 +115,8 @@ function parseJSON(json) {
     throw new SyntaxError("parseJSON");
 }
 
+
+/*function to add the flash to the page*/
 var myflash = function() {
         var flashvars = {};
         var params = {
@@ -97,7 +137,7 @@ if (!Modernizr.input.placeholder) {
     });
 }
 
-
+/*function to animate the cloud*/
 var animNuage = function() {
         $('#nuage').everyTime(10, function() {
             $('#nuage').animate({
@@ -182,6 +222,8 @@ var animNuage = function() {
 
 
 $(function() {
+    /* delay before we show the forms, if we use the send.php      */
+    /* file then avoid flash is set to true and delay keep on 1000 */
     var delay = 1000;
 
     if (!avoidFlash) {
@@ -191,16 +233,31 @@ $(function() {
         $("#video").hide().remove();
     }
 
+    /*allow for font replacement*/
     Cufon.replace('form, #scorediv');
 
-    //$('#message_input_box').center();
+    /*allow to subscribe some event*/
     $.subscribe("show_form", function(e, a, b, c) {
-        console.log(a + b + c);
+        //console.log(a + b + c);
         animNuage();
+        $("#name").html(translation.your_name);
+        $("#name_lb").html(translation.your_name_fld);
+
+        $("#email").html(translation.your_email);
+        $("#email_lb").html(translation.your_email_fld);
+
+        $("#message").html(translation.your_mesage);
+        $("#message_lb").html(translation.your_mesage_fld);
+
+        $("#send_message").html(translation.send);
+        
+
         $("#video").fadeOut("fast").remove();
         $("#message_input_box").fadeIn();
         $("#nuage, #nuage1").fadeIn();
     });
+
+    /*use poll to simplify delay management*/
 
     Poll.start({
         name: "show_form",
@@ -211,7 +268,9 @@ $(function() {
         }
     });
 
-
+    /* observ the submit event and call the post in AJAX request */
+    /* also verify the content of the forms                      */
+    
     $('#new_message').submit(function() {
         
         $("#feedback").html(translation.submit).fadeIn("slow");
