@@ -61,7 +61,9 @@ if (!empty($_POST))
 		
 		
 
-			if($_POST['lang']!='en'||$_POST['lang']!='fr'||$_POST['lang']!='es'||$_POST['lang']!='de'||$_POST['lang']!='pl'){
+			if($_POST['lang']=='en'||$_POST['lang']=='fr'||$_POST['lang']=='es'||$_POST['lang']=='de'||$_POST['lang']=='pl'){
+				$_POST['lang']=$_POST['lang'];
+			}else{
 				$_POST['lang']='en';
 			}
 
@@ -73,28 +75,12 @@ if (!empty($_POST))
 		$nuage2_mail = $message->embed(Swift_Image::fromPath("nuage2_mail.png"));	
 		$video_go = $message->embed(Swift_Image::fromPath("video_go.png"));	
 
-		$message->setBody(
-			'<html>' .
-			' <head></head>' .
-			' <body style="height:100%;text-align:center;color:#BBB;display:block;background-color:#FFF;">' .
-			'  <img style="position:relative;margin:0 auto;display:block;" src="' . $logoid . '" width="120px" height="120px" alt="Cat group"/>'.
-			'  <h1 style="font-size:14px">'.
-			'  '.$_POST['name'].',</h1>'.
-			'  <p>' .
-			$translation[$_POST['lang']].
-			'  </p>' .
-			' </body>' .
-			'</html>',
-	   	   'text/html' //Mark the content-type as HTML
-		);
-
-
-		$message->setBody('<html dir="ltr" lang="fr-FR"><head>
-											<meta charset="UTF-8">
+		$message->setBody('<html dir="ltr"><head>
+											<meta charset="UTF-8"/>
 											</head>
-	<body style="margin:0px;padding:0px;color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: #7da7d9; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7da7d9", endColorstr="#feffff"); background: -webkit-gradient(linear, left top, left bottom, from(#7da7d9), to(#feffff)); background: -moz-linear-gradient(top,  #7da7d9,  #feffff);vertical-align:baseline;font-family:Helvetica, "Trebuchet MS", Verdana, Arial, sans-serif;">
+	<body style="margin:0px;padding:0px;color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: #7da7d9; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#7da7d9\', endColorstr=\'#feffff\'); background: -webkit-gradient(linear, left top, left bottom, from(#7da7d9), to(#feffff)); background: -moz-linear-gradient(top,  #7da7d9,  #feffff);vertical-align:baseline;font-family:Helvetica, \'Trebuchet MS\', Verdana, Arial, sans-serif;">
 	
-		<div style="color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: transparent;vertical-align:baseline;font-family:Helvetica, "Trebuchet MS", Verdana, Arial, sans-serif;">
+		<div style="margin:0px;padding:0px;color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: #7da7d9; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#7da7d9\', endColorstr=\'#feffff\'); background: -webkit-gradient(linear, left top, left bottom, from(#7da7d9), to(#feffff)); background: -moz-linear-gradient(top,  #7da7d9,  #feffff);vertical-align:baseline;font-family:Helvetica, \'Trebuchet MS\', Verdana, Arial, sans-serif;">
 			<div style="margin:0px auto;border-left:0px solid ;border-right:0px solid;padding:0 5px;width:600px;background:none repeat scroll 0 0;">
 				
 				<div style="margin:0px 0 0;border:none;padding:0;">
@@ -105,7 +91,7 @@ if (!empty($_POST))
 									<td style="margin:0;border:none;padding:0;">
 										<h1 style="margin:32px 0 17px;border:none;padding:0;width:100px;font-size:30px;font-family:Helvetica, "Trebuchet MS", Verdana, Arial, sans-serif;line-height:36px;">
 											<span style="margin:0;border:none;padding:0;">
-													<img alt=" " src="' . $nuage . '">
+													<img alt=" " src="' . $nuage . '"/>
 											</span>
 										</h1>
 									</td>
@@ -124,8 +110,8 @@ if (!empty($_POST))
 								'.$translation[$_POST['lang']].'
 							</div>
 							<span style="margin:0;border:none;padding:0;margin-left: 360px;margin-top: -41px;position: absolute;">
-													<a href="http://lab.soixantecircuits.fr/cat-greetings/index.php?lang='.
-													$_POST['lang'].'&message='.htmlentities($_POST['message']).'"><img border=0 style="border:0px solid;" alt="e-card" src="'.$video_go.'"></a>
+													<a href=\'http://lab.soixantecircuits.fr/cat-greetings/index.php?lang='.
+													$_POST['lang'].'&message="'.urlencode($_POST['message']).'"\'><img border=0 style="border:0px solid;" alt="e-card" src="'.$video_go.'"/></a>
 							</span>
 						</div>
 					</div>
@@ -138,7 +124,7 @@ if (!empty($_POST))
 							<table style="border: 0px solid;width: 100%;text-align: right;">
 								<tr style="border: 0px solid;width: 100%;text-align: right;background-color: transparent;color: black;margin:0px;padding:0px">
 									<th style="border: 0px solid;width: 100%;text-align: right;background-color: transparent;color: black;margin:0px;padding:0px"><span style="margin:0;border:none;padding:0;">
-													<img alt=" " src="' . $nuage2_mail . '>
+													<img alt=" " src="' . $nuage2_mail . '"/>
 											</span></th>
 								</tr>
 							</table>

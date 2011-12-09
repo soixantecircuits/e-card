@@ -7,6 +7,7 @@ function sanitize($var,$toInt=false){
 if (!empty ($_GET))
 {
   if (isset($_GET['lang']) != '') { $_GET['lang'] = sanitize($_GET['lang']); }
+  if (isset($_GET['message']) != '') { $_GET['message'] = sanitize($_GET['message']); }
 }else if (!empty ($_POST)){
   echo '<!--POST-->';
 }else{
@@ -54,16 +55,18 @@ if (!empty ($_GET))
   var avoidFlash = false;
   <?php if($_GET['lang']==""){$_GET['lang']="en";}?>
     var lang = "<?php echo $_GET['lang']; ?>";
+    var user_msg = <?php echo $_GET['message'];?>;
   </script>
 </head>
 
 <body>
   <div id="video">
-      <h2>Sorry, you need flash to play this e-card, go download it there :</h2>
+      <h2></h2>
       <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
   </div>
   <div id="nuage"></div>
   <div id="nuage1"></div>
+  <div id="message_user"></div>
   <div id="main" role="main">
     <div id="message_input_box">
       <div id="logo"></div>

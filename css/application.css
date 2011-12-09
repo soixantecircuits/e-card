@@ -16,6 +16,17 @@ fieldset{
 	border:0px solid;
 }
 
+#message_user{
+	color: #fff;
+	position: absolute;
+	top: 20%;
+	font-size: 22px;
+	text-align: center;
+	width: 100%;
+	display: block;
+	background:transparent;
+}
+
 #message_input_box{
 	display:none;
 	max-width: 800px;

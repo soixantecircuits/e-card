@@ -22,6 +22,7 @@
 	<section>
 		<autoplay>on</autoplay>	<!-- ON/OFF -->	
 		<id>0</id>					<!-- THE 1ST CONTENT WILL DISPLAY -->
+		<id>1</id>					<!-- THE 1ST CONTENT WILL DISPLAY -->
 	</section>
 	
 	
@@ -30,7 +31,20 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- THE CONTENT PART OF THE XML FILE. HERE YOU CHOOSE WHAT TYPE OF CONTENT WILL BE LOADED. -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////// -->	
-		
+	
+	<item>
+		<type>image</type>
+		<delay>4</delay>
+		<path>img/blank.png</path>
+		<resize>scale</resize>
+		<verticalalign>center</verticalalign>
+		<horizontalalign>center</horizontalalign>	
+		<alpha>0</alpha>
+		<effectpattern>none</effectpattern>								
+		<effectalpha></effectalpha>										
+		<smoothing>0</smoothing>  										
+	</item>	
+
 		
 	<item>
 		<type>video</type>							<!-- TYPE OF THE CONTENT FILE -->

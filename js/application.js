@@ -164,7 +164,15 @@ $(function() { /* delay before we show the forms, if we use the send.php      */
 
     $('#video').hide();
     if (!avoidFlash) {
+
+        /*should check with the background.xml files which handle video in order to correct fadein out */
+        /*with video*/
+        $("#message_user").html(user_msg).fadeIn("slow").delay(3000).fadeOut(400);
         myflash();
+        if(swfobject.getFlashPlayerVersion===null){
+            $('#video h2').html('Sorry, you need flash to play this e-card, go download it there :');
+        }
+        $('#video').show();
         delay = 54000;
     } else {
         $("#video").hide().remove();
@@ -208,7 +216,7 @@ $(function() { /* delay before we show the forms, if we use the send.php      */
 
     $('#new_message').submit(function() {
 
-        $("#feedback").html(translation.submit).fadeIn("slow");
+        $("#feedback").html(translation.submit).fadeIn("slow").delay(2000).fadeOut(400);
 
         if (cat.isSubmitable) {
             isSubmitable = false;
