@@ -116,6 +116,7 @@ if (!empty ($_GET))
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.0.min.js"><\/script>')</script>
 
   <!-- scripts concatenated and minified via build script -->
+  <script defer src="js/mylibs/i18n.js"></script>
   <script defer src="js/libs/cufon-yui.js"></script>
   <script defer src="js/libs/swfobject.js"></script>
   <script defer src="js/mylibs/calibri.font.js"></script>
