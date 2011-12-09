@@ -125,7 +125,7 @@ if (!empty($_POST))
 							</div>
 							<span style="margin:0;border:none;padding:0;margin-left: 360px;margin-top: -41px;position: absolute;">
 													<a href="http://lab.soixantecircuits.fr/cat-greetings/index.php?lang='.
-													$_POST['lang'].'&message='.$_POST['message'].'"><img border=0 style="border:0px solid;" alt="e-card" src="'.$video_go.'"></a>
+													$_POST['lang'].'&message='.htmlentities($_POST['message']).'"><img border=0 style="border:0px solid;" alt="e-card" src="'.$video_go.'"></a>
 							</span>
 						</div>
 					</div>

@@ -172,6 +172,7 @@ $(function() { /* delay before we show the forms, if we use the send.php      */
 
     $('#language').change(function() {
         translation = translation_list[$("#language").val()];
+        $("#lang").val($("#language").val());
         refresh_i18n();
     });
 
@@ -224,16 +225,16 @@ $(function() { /* delay before we show the forms, if we use the send.php      */
             console.log(form[0]);
             var msg = translation.error;
 
-            if (form[0].value == validate.name) {
+            if (form[1].value == validate.name) {
                 valide = false;
                 msg = translation.name;
-            } else if (form[2].value == validate.message) {
+            } else if (form[3].value == validate.message) {
                 valide = false;
                 msg = translation.message;
-            } else if (form[1].value == validate.email) {
+            } else if (form[2].value == validate.email) {
                 valide = false;
                 msg = translation.email;
-            } else if (!isValidEmailAddress(form[1].value)) {
+            } else if (!isValidEmailAddress(form[2].value)) {
                 valide = false;
                 msg = translation.email;
             }
