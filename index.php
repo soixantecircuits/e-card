@@ -43,8 +43,7 @@ if (!empty ($_GET))
   <link rel="stylesheet" href="css/inuit.css">
   <!-- Plugins -->
   <link rel="stylesheet" href="css/igloos.css">
-  <link rel="stylesheet" href="css/jqtransform.css">
-<link rel="stylesheet" href="css/application.css">  
+  <link rel="stylesheet" href="css/application.css">  
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
   <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
@@ -71,7 +70,7 @@ if (!empty ($_GET))
       <form id="new_message">
         <fieldset class="grid-12" id="array">
         <label id="lang_lb" for="language">Language:</label>
-          <select id="language" name="language" class="jqtransform">   
+          <select id="language" name="language">   
             <option <?php if ($_GET['lang']=="en") echo "selected "; ?>value="en">English</option> 
             <option <?php if ($_GET['lang']=="fr") echo "selected "; ?>value="fr">Français</option>
             <option <?php if ($_GET['lang']=="es") echo "selected "; ?>value="es">español</option>
@@ -126,7 +125,6 @@ if (!empty ($_GET))
   <script defer src="js/libs/h5f.min.js"></script>
   <script defer src="js/plugins/jquery.tinypubsub.min.js"></script>
   <script defer src="js/plugins/jquery.easing.1.3.js"></script>
-  <script defer src="js/plugins/jquery.jqtransform.js"></script>
   <script defer src="js/plugins/jquery.timers.js"></script>
   <script defer src="js/application.js"></script>
   <!-- end scripts -->

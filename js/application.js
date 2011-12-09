@@ -44,7 +44,7 @@ var translation_list = {
         your_message: "Votre message",
         your_message_fld: "Qu'avez-vous en tête ?",
         send_msg: "Envoyer le message",
-        lang_lb: "Language:"
+        lang_lb: "Langue :"
     },
     de: {
         error: "Oops",
@@ -227,26 +227,7 @@ var animNuage = function() {
         });
     };
 
-
-$(function() { /* delay before we show the forms, if we use the send.php      */
-    /* file then avoid flash is set to true and delay keep on 1000 */
-    var delay = 1000;
-     $(".jqtransform").jqTransform();
-    $('#video').hide();
-    if (!avoidFlash) {
-        myflash();
-        delay = 54000;
-    } else {
-        $("#video").hide().remove();
-    }
-
-    /*allow for font replacement*/
-    Cufon.replace('form, #scorediv');
-
-    /*allow to subscribe some event*/
-    $.subscribe("show_form", function(e, a, b, c) {
-        //console.log(a + b + c);
-        animNuage();
+var refresh_i18n = function() {
         $("#name").attr("placeholder", translation.your_name_fld);
         $("#name_lb").html(translation.your_name);
 
@@ -266,6 +247,34 @@ $(function() { /* delay before we show the forms, if we use the send.php      */
             });
         }
         Cufon.refresh();
+    }
+
+$(function() { /* delay before we show the forms, if we use the send.php      */
+    /* file then avoid flash is set to true and delay keep on 1000 */
+    var delay = 1000;
+
+    $('#video').hide();
+    if (!avoidFlash) {
+        myflash();
+        delay = 54000;
+    } else {
+        $("#video").hide().remove();
+    }
+
+    $('#language').change(function() {
+        translation = translation_list[$("#language").val()];
+        refresh_i18n();
+    });
+
+    /*allow for font replacement*/
+    Cufon.replace('form, #scorediv');
+
+    /*allow to subscribe some event*/
+    $.subscribe("show_form", function(e, a, b, c) {
+        //console.log(a + b + c);
+        animNuage();
+
+        refresh_i18n();
 
         /*you can not fadeOut the object as it's only flash in the body*/
         $("#video").remove();
@@ -278,8 +287,7 @@ $(function() { /* delay before we show the forms, if we use the send.php      */
     Poll.start({
         name: "show_form",
         interval: delay,
-        action: function() {
-            /*dummy object just to show that we can use object in event*/
+        action: function() { /*dummy object just to show that we can use object in event*/
             $.publish("show_form", ["a", "b", "c"]);
             return false;
         }
