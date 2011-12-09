@@ -55,7 +55,7 @@ if (!empty ($_GET))
   var avoidFlash = false;
   <?php if($_GET['lang']==""){$_GET['lang']="en";}?>
     var lang = "<?php echo $_GET['lang']; ?>";
-    var user_msg = <?php echo $_GET['message'];?>;
+    var user_msg = <?php if isset($_GET['message']!= ''){ echo $_GET['message'];}?>;
   </script>
 </head>
 
