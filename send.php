@@ -43,7 +43,7 @@ if (!empty ($_GET))
   <link rel="stylesheet" href="css/inuit.css">
   <!-- Plugins -->
   <link rel="stylesheet" href="css/igloos.css">
-  <link rel="stylesheet" href="css/jquery.iGrowl.min.css">
+  <link rel="stylesheet" href="css/jqtransform.css">
 <link rel="stylesheet" href="css/application.css">  
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
@@ -65,6 +65,14 @@ if (!empty ($_GET))
       <div id="logo"></div>
       <form id="new_message">
         <fieldset class="grid-12" id="array">
+          <label id="lang_lb" for="language">Language:</label>
+          <select name="select">   
+            <option <?php if ($_GET['lang']=="en") echo "selected "; ?>value="en">English</option> 
+            <option <?php if ($_GET['lang']=="fr") echo "selected "; ?>value="fr">Français</option>
+            <option <?php if ($_GET['lang']=="es") echo "selected "; ?>value="es">español</option>
+            <option <?php if ($_GET['lang']=="de") echo "selected "; ?>value="de">German</option>     
+            <option <?php if ($_GET['lang']=="pl") echo "selected "; ?>value="pl">polnisch</option>         
+          </select>
           <label id="name_lb" for="name">Your name:</label>
           <input name="name" type="text" id="name" required placeholder="Enter your full name">
       
@@ -117,8 +125,9 @@ if (!empty ($_GET))
   <script defer src="js/libs/poll.min.js"></script>
   <script defer src="js/libs/h5f.min.js"></script>
   <script defer src="js/plugins/jquery.tinypubsub.min.js"></script>
-  <script defer src="js/plugins/jquery.timers.js"></script>
   <script defer src="js/plugins/jquery.easing.1.3.js"></script>
+  <script defer src="js/plugins/jquery.jqtransform.js"></script>
+  <script defer src="js/plugins/jquery.timers.js"></script>
   <script defer src="js/application.js"></script>
   <!-- end scripts -->
 

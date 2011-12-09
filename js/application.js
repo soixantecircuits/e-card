@@ -19,14 +19,15 @@ var translation_list = {
         name: "Your name is not filled",
         email: "Please, check your email",
         send: "Send",
-        thankyou: "Thank you !"
+        thankyou: "Thank you !",
         your_name: "Your name:",
         your_name_fld: "Enter your full name ",
         receiver: "Receiver email address:",
         receiver_fld: "Enter his email address",
         your_message: "Your message",
         your_message_fld: "What's on your mind?",
-        send: "Send message"
+        send_msg: "Send message",
+        lang_lb: "Language:"
     },
     fr: {
         error: "Oops",
@@ -42,7 +43,8 @@ var translation_list = {
         receiver_fld: "Inscrivez l'adresse email du destinataire",
         your_message: "Votre message",
         your_message_fld: "Qu'avez-vous en tête ?",
-        send: "Envoyer le message",
+        send_msg: "Envoyer le message",
+        lang_lb: "Language:"
     },
     de: {
         error: "Oops",
@@ -58,7 +60,8 @@ var translation_list = {
         receiver_fld: "Geben Sie die E-Mail-Adresse",
         your_message: "Ihre Nachricht",
         your_message_fld: "Was willst du im Sinn?",
-        send: "Nachricht senden"
+        send_msg: "Nachricht senden",
+        lang_lb: "Sprache :"
     },
     pl: {
         error: "Oops",
@@ -74,7 +77,8 @@ var translation_list = {
         receiver_fld: "Wpisz adres e-mail",
         your_message: "Twoja wiadomość",
         your_message_fld: "Co masz na myśli?",
-        send: "Wyślij wiadomość"
+        send_msg: "Wyślij wiadomość",
+        lang_lb: "język:"
     },
     es: {
         error: "Oops",
@@ -90,7 +94,8 @@ var translation_list = {
         receiver_fld: "Escriba la dirección de correo electrónico del destinatario",
         your_message: "Tu mensaje",
         your_message_fld: "¿Qué tienes en mente?",
-        send: "Enviar mensaje"
+        send_msg: "Enviar mensaje",
+        lang_lb: "lengua:"
     }
 };
 
@@ -99,12 +104,14 @@ var translation = translation_list[lang];
 
 
 /*check if the email is correct*/
+
 function isValidEmailAddress(emailAddress) {
     var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     return pattern.test(emailAddress);
 }
 
 /*cross browser parsing _ might not be really usefull, but used in the data parsing*/
+
 function parseJSON(json) {
     try {
         if (/^("(\\.|[^"\\\n\r])*?"|[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t])+?$/.test(json)) {
@@ -221,15 +228,15 @@ var animNuage = function() {
     };
 
 
-$(function() {
-    /* delay before we show the forms, if we use the send.php      */
+$(function() { /* delay before we show the forms, if we use the send.php      */
     /* file then avoid flash is set to true and delay keep on 1000 */
     var delay = 1000;
-
+     $(".jqtransform").jqTransform();
+    $('#video').hide();
     if (!avoidFlash) {
         myflash();
         delay = 54000;
-    }else{
+    } else {
         $("#video").hide().remove();
     }
 
@@ -240,19 +247,28 @@ $(function() {
     $.subscribe("show_form", function(e, a, b, c) {
         //console.log(a + b + c);
         animNuage();
-        $("#name").html(translation.your_name);
-        $("#name_lb").html(translation.your_name_fld);
+        $("#name").attr("placeholder", translation.your_name_fld);
+        $("#name_lb").html(translation.your_name);
 
-        $("#email").html(translation.your_email);
-        $("#email_lb").html(translation.your_email_fld);
+        $("#email").attr("placeholder", translation.receiver_fld);
+        $("#email_lb").html(translation.receiver);
 
-        $("#message").html(translation.your_mesage);
-        $("#message_lb").html(translation.your_mesage_fld);
+        $("#message").attr("placeholder", translation.your_message_fld);
+        $("#message_lb").html(translation.your_message);
 
-        $("#send_message").html(translation.send);
-        
+        $("#lang_lb").html(translation.lang_lb);
 
-        $("#video").fadeOut("fast").remove();
+        $("#send_message").val(translation.send_msg);
+
+        if (!Modernizr.input.placeholder) {
+            $(function() {
+                H5F.setup($("#new_message"));
+            });
+        }
+        Cufon.refresh();
+
+        /*you can not fadeOut the object as it's only flash in the body*/
+        $("#video").remove();
         $("#message_input_box").fadeIn();
         $("#nuage, #nuage1").fadeIn();
     });
@@ -263,6 +279,7 @@ $(function() {
         name: "show_form",
         interval: delay,
         action: function() {
+            /*dummy object just to show that we can use object in event*/
             $.publish("show_form", ["a", "b", "c"]);
             return false;
         }
@@ -270,11 +287,11 @@ $(function() {
 
     /* observ the submit event and call the post in AJAX request */
     /* also verify the content of the forms                      */
-    
+
     $('#new_message').submit(function() {
-        
+
         $("#feedback").html(translation.submit).fadeIn("slow");
-        
+
         if (cat.isSubmitable) {
             isSubmitable = false;
 
@@ -320,7 +337,7 @@ $(function() {
                         var data = parseJSON(msg);
 
                         $("#scorediv").html(translation.thankyou).fadeIn("slow");
-                        Cufon.refresh()
+                        Cufon.refresh();
                         $('#message_input_box').fadeOut('slow');
 
                     },

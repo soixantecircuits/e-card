@@ -124,7 +124,8 @@ if (!empty($_POST))
 								'.$translation[$_POST['lang']].'
 							</div>
 							<span style="margin:0;border:none;padding:0;margin-left: 360px;margin-top: -41px;position: absolute;">
-													<img alt=" " src="' . $video_go . '">
+													<a href="http://lab.soixantecircuits.fr/cat-greetings/index.php?lang='.
+													$_POST['lang'].'&message='.$_POST['message'].'"><img border=0 style="border:0px solid;" alt="e-card" src="'.$video_go.'"></a>
 							</span>
 						</div>
 					</div>
