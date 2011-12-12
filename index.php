@@ -76,7 +76,7 @@ if (!empty ($_GET))
             <option <?php if ($_GET['lang']=="en") echo "selected "; ?>value="en">English</option> 
             <option <?php if ($_GET['lang']=="fr") echo "selected "; ?>value="fr">Français</option>
             <option <?php if ($_GET['lang']=="es") echo "selected "; ?>value="es">español</option>
-            <option <?php if ($_GET['lang']=="de") echo "selected "; ?>value="de">German</option>     
+            <option <?php if ($_GET['lang']=="de") echo "selected "; ?>value="de">Deutsch</option>     
             <option <?php if ($_GET['lang']=="pl") echo "selected "; ?>value="pl">polnisch</option>         
           </select>
           <label id="name_lb" for="name">Your name:</label>
