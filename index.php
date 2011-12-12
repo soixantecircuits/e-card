@@ -21,7 +21,6 @@ if (!empty ($_GET))
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
@@ -53,7 +52,7 @@ if (!empty ($_GET))
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
   <script>
   var avoidFlash = false;
-  <?php if($_GET['lang']==""){$_GET['lang']="en";}?>
+  <?php if(isset($_GET['lang'])==""){$_GET['lang']="en";}?>
     var lang = "<?php echo $_GET['lang']; ?>";
     var user_msg = <?php if(isset($_GET['message'])!= ''){ echo $_GET['message'];}else{echo "''";}?>;
   </script>
@@ -81,13 +80,13 @@ if (!empty ($_GET))
             <option <?php if ($_GET['lang']=="pl") echo "selected "; ?>value="pl">polnisch</option>         
           </select>
           <label id="name_lb" for="name">Your name:</label>
-          <input name="name" type="text" id="name" required placeholder="Enter your full name">
+          <input name="name" type="text" id="name" required placeholder="">
       
           <label id="email_lb" for="email">Receiver email address:</label>
-          <input name="email" type="email" id="email" required placeholder="Enter your email address">
+          <input name="email" type="email" id="email" required placeholder="">
       
           <label id="message_lb" for="message">Your message:</label>
-          <textarea name="message" id="message" placeholder="What's on your mind?"></textarea>
+          <textarea name="message" id="message" placeholder=""></textarea>
           <p class="text-center">
             <input id="send_message" type="submit" value="Send message">
           </p>

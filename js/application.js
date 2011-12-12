@@ -47,11 +47,6 @@ var myflash = function() {
         swfobject.embedSWF("preview.swf", "video", "100%", "100%", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
     };
 
-if (!Modernizr.input.placeholder) {
-    $(function() {
-        H5F.setup($("#new_message"));
-    });
-}
 
 /*function to animate the cloud*/
 var animNuage = function() {
@@ -137,13 +132,13 @@ var animNuage = function() {
     };
 
 var refresh_i18n = function() {
-        $("#name").attr("placeholder", translation.your_name_fld);
+        //$("#name").attr("placeholder", translation.your_name_fld);
         $("#name_lb").html(translation.your_name);
 
-        $("#email").attr("placeholder", translation.receiver_fld);
+        //$("#email").attr("placeholder", translation.receiver_fld);
         $("#email_lb").html(translation.receiver);
 
-        $("#message").attr("placeholder", translation.your_message_fld);
+        //$("#message").attr("placeholder", translation.your_message_fld);
         $("#message_lb").html(translation.your_message);
 
         $("#lang_lb").html(translation.lang_lb);
@@ -161,6 +156,12 @@ var refresh_i18n = function() {
 $(function() { /* delay before we show the forms, if we use the send.php      */
     /* file then avoid flash is set to true and delay keep on 1000 */
     var delay = 1000;
+
+    if (!Modernizr.input.placeholder) {
+    $(function() {
+        H5F.setup($("#new_message"));
+    });
+}
 
     $('#video').hide();
     if (!avoidFlash) {

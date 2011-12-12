@@ -73,13 +73,13 @@ if (!empty ($_GET))
             <option <?php if ($_GET['lang']=="pl") echo "selected "; ?>value="pl">polnisch</option>         
           </select>
           <label id="name_lb" for="name">Your name:</label>
-          <input name="name" type="text" id="name" required placeholder="Enter your full name">
+          <input name="name" type="text" id="name" required placeholder="">
       
           <label id="email_lb" for="email">Receiver email address:</label>
-          <input name="email" type="email" id="email" required placeholder="Enter your email address">
+          <input name="email" type="email" id="email" required placeholder="">
       
           <label id="message_lb" for="message">Your message:</label>
-          <textarea name="message" id="message" placeholder="What's on your mind?"></textarea>
+          <textarea name="message" id="message" placeholder=""></textarea>
           <p class="text-center">
             <input id="send_message" type="submit" value="Send message">
           </p>
