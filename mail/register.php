@@ -3,10 +3,21 @@ require_once 'lib/swift_required.php';
 // écriture de données
 if (!empty($_POST))
 {
-	if (isset($_POST['name']) != '') { $_POST['name'] = sanitize($_POST['name']); }
+	if (isset($_POST['name']) != '') { 
+		$_POST['name'] = sanitize($_POST['name']); 
+		if (strlen ($_POST['name']) < 2)
+		{
+			$errMsg = 'Votre nom semble trop court';
+		}
+	}
 	if (isset($_POST['message']) != '') { $_POST['message'] = sanitize($_POST['message']); }
 	if (isset($_POST['lang']) != '') { $_POST['lang'] = sanitize($_POST['lang']); }
-	if (isset($_POST['email']) != '') { $_POST['email'] = sanitize($_POST['email']); }
+	if (isset($_POST['email']) != '') { 
+		$_POST['email'] = sanitize($_POST['email']);
+		if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){ 
+			$errMsg = 'Votre email n\'est pas valide';
+		} 
+	}
 	/* ERREURS
 		0: 	Veuillez indiquer votre nom
 		1:	L'adresse email que vous avez indiquée n'est pas valide
@@ -22,17 +33,8 @@ if (!empty($_POST))
 		500: No get et no post
 		600: Impossible de vider la base
 	*/
-	
-	// check validité email
-	else if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){ 
-		$errMsg = 'Votre email n\'est pas valide';
-	}
-	// check nom
-	else if (strlen ($_POST['name']) < 2)
-	{
-		$errMsg = 'Votre nom semble trop court';
-	}
-	else if (isset ($errMsg))
+		
+	if (isset ($errMsg))
 	{
 		echo '{"success":false, "msg":'.json_encode($errMsg).'}';
 		exit;

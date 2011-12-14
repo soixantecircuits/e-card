@@ -7,6 +7,9 @@ function sanitize($var,$toInt=false){
 if (!empty ($_GET))
 {
   if (isset($_GET['lang']) != '') { $_GET['lang'] = sanitize($_GET['lang']); }
+  else{
+      $_GET['lang']="en";
+  }
 }else if (!empty ($_POST)){
   echo '<!--POST-->';
 }else{
