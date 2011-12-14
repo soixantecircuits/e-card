@@ -78,10 +78,9 @@ if (!empty($_POST))
 		$message->setBody('<html dir="ltr"><head>
 											<meta charset="UTF-8"/>
 											</head>
-	<body style="margin:0px;padding:0px;color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: #7da7d9; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#7da7d9\', endColorstr=\'#feffff\'); background: -webkit-gradient(linear, left top, left bottom, from(#7da7d9), to(#feffff)); background: -moz-linear-gradient(top,  #7da7d9,  #feffff);vertical-align:baseline;font-family:Helvetica, \'Trebuchet MS\', Verdana, Arial, sans-serif;">
-	
-		<div style="margin:0px;padding:0px;color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: #7da7d9; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#7da7d9\', endColorstr=\'#feffff\'); background: -webkit-gradient(linear, left top, left bottom, from(#7da7d9), to(#feffff)); background: -moz-linear-gradient(top,  #7da7d9,  #feffff);vertical-align:baseline;font-family:Helvetica, \'Trebuchet MS\', Verdana, Arial, sans-serif;">
-			<div style="margin:0px auto;border-left:0px solid ;border-right:0px solid;padding:0 5px;width:600px;background:none repeat scroll 0 0;">
+	<body>
+		<div style="margin:0px;padding:0px;color:#fff;font-size:12px;line-height:18px;background:none repeat scroll 0 0 background: #7da7d9; background: -webkit-gradient(linear, left top, left bottom, from(#7da7d9), to(#feffff)); background: -moz-linear-gradient(top,  #7da7d9,  #feffff);vertical-align:baseline;font-family:Helvetica, \'Trebuchet MS\', Verdana, Arial, sans-serif;">
+			<div style="margin:0px auto;border-left:0px solid ;border-right:0px solid;padding:0 5px;width:600px;background:none repeat scroll 0 0;filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#7da7d9\', endColorstr=\'#feffff\');">
 				
 				<div style="margin:0px 0 0;border:none;padding:0;">
 					<div style="margin:0;border:none;padding:0;">
@@ -124,7 +123,7 @@ if (!empty($_POST))
 							<table style="border: 0px solid;width: 100%;text-align: right;">
 								<tr style="border: 0px solid;width: 100%;text-align: right;background-color: transparent;color: black;margin:0px;padding:0px">
 									<th style="border: 0px solid;width: 100%;text-align: right;background-color: transparent;color: black;margin:0px;padding:0px"><span style="margin:0;border:none;padding:0;">
-													<img alt=" " src="' . $nuage2_mail . '"/>
+													<img alt=" " src="'.$nuage2_mail.'"/>
 											</span></th>
 								</tr>
 							</table>
