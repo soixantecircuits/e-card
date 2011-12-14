@@ -11,6 +11,11 @@ var cat = {
 /*we load the scrip with lang variable setup from the send.php file or index.php file*/
 var translation = translation_list[lang];
 
+function limitText(limitField, limitNum) {
+    if (limitField.value.length > limitNum) {
+        limitField.value = limitField.value.substring(0, limitNum);
+    }
+}
 
 /*check if the email is correct*/
 
@@ -151,17 +156,21 @@ var refresh_i18n = function() {
             });
         }
         Cufon.refresh();
-    }
+};
 
 $(function() { /* delay before we show the forms, if we use the send.php      */
     /* file then avoid flash is set to true and delay keep on 1000 */
     var delay = 1000;
 
-    if (!Modernizr.input.placeholder) {
-    $(function() {
-        H5F.setup($("#new_message"));
+    $("#message").keydown(function() {
+        limitText(this,300);
     });
-}
+
+    if (!Modernizr.input.placeholder) {
+        $(function() {
+            H5F.setup($("#new_message"));
+        });
+    }
 
     $('#video').hide();
     if (!avoidFlash) {
@@ -170,7 +179,7 @@ $(function() { /* delay before we show the forms, if we use the send.php      */
         /*with video*/
         $("#message_user").html(user_msg).fadeIn("slow").delay(3000).fadeOut(400);
         myflash();
-        if(swfobject.getFlashPlayerVersion===null){
+        if (swfobject.getFlashPlayerVersion === null) {
             $('#video h2').html('Sorry, you need flash to play this e-card, go download it there :');
         }
         $('#video').show();
